@@ -175,6 +175,7 @@ class Character {
     }
 }
 
+let musicChanging = false
 let currentBgMusic = ""
 let musicVolume = 0.3
 let bgMusic = new Audio()
@@ -218,16 +219,21 @@ class Scene {
 
     draw() {
         if (currentBgMusic != this.music) {
-            currentBgMusic = this.music
-            fadeToMute(() => {
-                bgMusic.src = this.music
+            if (musicChanging == false) {
                 currentBgMusic = this.music
+                musicChanging = true
+                fadeToMute(() => {
+                    bgMusic.src = this.music
+                    currentBgMusic = this.music
 
-                bgMusic.currentTime = 0
-                bgMusic.play()
+                    bgMusic.currentTime = 0
+                    bgMusic.play()
 
-                fadeToVolume()
-            })
+                    fadeToVolume()
+                    musicChanging = false
+                })
+            }
+            
         }
         background.style.backgroundImage = this.bg
         console.log(this.bg)
