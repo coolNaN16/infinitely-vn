@@ -255,6 +255,7 @@ body * img {
     translate: -100% 0;
     /* animation-name: fade-in; */
     animation-duration: 1s;
+    animation-timing-function: cubic-bezier(1,.55,.45,1.01);
     animation-fill-mode: forwards; 
 }
 
