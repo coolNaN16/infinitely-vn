@@ -4,7 +4,7 @@ const dialogueLabel = document.getElementById("dialogueLabel")
 const nameLabel = document.getElementById("nameLabel")
 const overlay = document.getElementById("overlay")
 const choiceBox = document.getElementById("choiceBox")
-
+const nextBtn = document.getElementById("nextBtn")
 
 const dialogueCD = 0.3
 let lastDialogue = Date.now()
@@ -85,6 +85,7 @@ class Dialogue {
 
         dialogueTypeFinished = false
         dialogueTypeSkip = false
+        nextBtn.style.display = "none"
         for (let i = 0; i < this.text.length; i++) {
             setTimeout(() => {
                 if (cDialogueIndex == thisDialogueIndex && currentScene == thisScene && dialogueTypeSkip == false) {
@@ -97,7 +98,9 @@ class Dialogue {
                 }
                 if (i == this.text.length - 1 && cDialogueIndex == thisDialogueIndex && currentScene == thisScene) {
                     dialogueTypeFinished = true
-                    
+                    nextBtn.style.display = "block"
+                    nextBtn.offsetHeight
+
                     if (this.nextScene) {
                         currentScene = this.nextScene
                         cDialogueIndex = 0
@@ -215,6 +218,7 @@ class Scene {
 
     draw() {
         if (currentBgMusic != this.music) {
+            currentBgMusic = this.music
             fadeToMute(() => {
                 bgMusic.src = this.music
                 currentBgMusic = this.music
@@ -402,6 +406,8 @@ function next() {
             dialogueTypeFinished = true
             lastDialogue = Date.now()
             dialogueLabel.innerHTML = currentDialogues[cDialogueIndex - 1].text
+            nextBtn.style.display = "block"
+            nextBtn.offsetHeight
         }
     }
 }
