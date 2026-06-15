@@ -1,0 +1,268 @@
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+    background-color: black;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+}
+
+body * {
+    user-select: none;
+}
+
+body * img {
+    pointer-events: none;
+}
+
+#bg {
+    background-image: url(assets/bg/mouri.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+
+/* DIALOGUE BOX */
+
+#dialogueBox {
+    z-index: 100;
+
+    color: white;
+
+    border: 5px solid white;
+    box-sizing: border-box;
+    background-color: rgba(138, 115, 146, 0.9);
+    position: absolute;
+    
+    padding: 16px;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    aspect-ratio: 7;
+    width: 60%;
+    height: auto;
+
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+#dialogueLabel {
+    box-sizing: border-box;
+    padding: 15px;
+    font-size: x-large;
+    overflow: auto;
+    text-align: left;
+    width: 100%;
+    height: 100%;
+}
+
+#nextBtn {
+    aspect-ratio: 1;
+    color: white;
+    right: 5%;
+    bottom: 5%;
+    position: absolute;
+    background: transparent;
+    border: 0;
+}
+
+#nameBox {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border: 5px solid white;
+    box-sizing: border-box;
+    background-color: white;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: -5px;
+    top: 0;
+    padding: 0;
+    margin: 0;
+    transform: translateY(-100%);
+    width: 30%;
+    height: auto;
+    aspect-ratio: 10;
+}
+
+#nameLabel {
+    
+    color: black;
+    font-size: larger;
+    text-align: center;
+    padding: 5px;
+    margin: 0;
+}
+
+/* CONTROL PANEL */
+
+#controlPanel {
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 5px;
+    aspect-ratio: 1;
+    width: 5%;
+    height: auto;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+/* CHOICES */
+
+#choiceBox {
+    z-index: 50;
+    box-sizing: border-box;
+    padding: 10px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translate(-25px, -100%);
+    width: 30%;
+    height: auto;
+    /* background-color: rgba(138, 115, 146, 0.9); */
+    background-color: white;
+    border: 5px solid white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+#choiceBox button {
+    padding: 5px;
+    width: 100%;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: rgb(255, 255, 255);
+    background-color: rgb(138, 115, 146);
+    /* border: 3px solid white; */
+    border: 0;
+    border-radius: 5px;
+}
+
+#choicebox button:hover {
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+#choiceLabel {
+    padding: 15px;
+    box-sizing: border-box;
+    background-color: gray;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    transform: translate(-50%, -100%);
+}
+
+
+/* characters */
+
+#character-1 {
+    position: absolute;
+    width: auto;
+    height: 100%;
+    left: 10%;
+    bottom: -10%;
+    z-index: 6;
+}
+
+#character-2 {
+    position: absolute;
+    width: auto;
+    height: 100%;
+    left: 30%;
+    bottom: -5%;
+    z-index: 5;
+}
+
+#character-3 {
+    position: absolute;
+    width: auto;
+    height: 100%;
+    left: 70%;
+    translate: -100% 0;
+    bottom: -5%;
+    z-index: 6;
+}
+
+#character-4 {
+    position: absolute;
+    width: auto;
+    height: 100%;
+    left: 90%;
+    translate: -100% 0;
+    bottom: -10%;
+    z-index: 5;
+}
+
+.talking {
+    filter: brightness(100%);
+}
+
+.standing {
+    filter: brightness(60%);
+}
+
+.listening {
+    filter: brightness(30%);
+}
+
+.hidden {
+    filter: brightness(0%);
+}
+
+/* effects */
+
+#overlay {
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: black;
+    translate: -100% 0;
+    /* animation-name: fade-in; */
+    animation-duration: 1s;
+    animation-fill-mode: forwards; 
+}
+
+
+/* anims */
+
+@keyframes fade-in {
+    0% {transform: translateX(0); opacity: 1;}
+    100% {transform: translateX(100%); opacity: 1;}
+}
+
+@keyframes fade-out {
+    0% {transform: translateX(100%); opacity: 1;}
+    100% {transform: translateX(200%); opacity: 1;}
+}
+
+
+
+
+@keyframes bounce {
+    0% {transform: translateY(0%);}
+    50% {transform: translateY(-5%);}
+    100% {transform: translateY(0%);}
+}
