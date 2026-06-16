@@ -329,7 +329,7 @@ const scenes = {
             "y" : -10
         }
     ],[
-        new Dialogue(haibara, "This is <b>Detective Mouri's Detective Agency</b>!", null, "neutral"),
+        new Dialogue(haibara, "This is <b>Detective Mouri's Agency</b>!", null, "neutral"),
         new Dialogue(haibara, "<b>Detective Mouri</b> works and lives here along with his daughter <b>Ran</b>, ", null, "neutral"),
         new Dialogue(haibara, "Oh yeah, <b>Conan</b> also lives here!", null, "neutral"),
         new Dialogue(haibara, "People usually go here to resolve their <b>problems</b>, ", null, "neutral"),
