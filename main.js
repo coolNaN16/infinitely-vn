@@ -337,7 +337,7 @@ const scenes = {
         new Dialogue(haibara, "Oh yeah, <b>Conan</b> also lives here!", null, "neutral"),
         new Dialogue(conan, "Hi!, ", null, "neutral", null, () => {addCharToScene(conan, 80, -10)}),
         new Dialogue(haibara, "Oh, hello!, ", null, "neutral"),
-        new Dialogue(haibara, "People usually go here to resolve their <b>problems</b>, ", null, "neutral"),
+        new Dialogue(haibara, "People usually go here to resolve their <b>problems</b>, ", null, "neutral", null, () => {removeChar(conan)}),
         new Dialogue(haibara, "Like seriously, sometimes it's not even a case!, ", null, "neutral"),
         new Dialogue(haibara, "Anyways... lets continue! ", null, "neutral"),
         new Dialogue(haibara, "Soo, where do you wanna go now?, ", 
@@ -445,11 +445,12 @@ function addCharToScene(char, x, y) {
 // }
 
 function removeChar(char) {
-    for (let i = 0; i < scenes[currentScene].characters.length; i++) {
-        if (scenes[currentScene].characters[i].char == char) {
-            scenes[currentScene].characters.splice(i, 1)
-        }
-    }
+    scenes[currentScene].characters = scenes[currentScene].characters.filter(character => character.char !== char)
+
+    char.bounce()
+    setTimeout(function() {
+        char.img.remove()
+    }, 200)
 }
 
 function changeNextScene(scene) {
