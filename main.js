@@ -174,6 +174,9 @@ class Character {
         this.img.style.left = x + "%"
         this.img.style.bottom = y + "%"
         foreground.append(this.img)
+        requestAnimationFrame(() => {
+            this.bounce()
+        })
     }
 
     moveTo(x, y) {
@@ -301,8 +304,8 @@ const haibara = new Character("Haibara Ai", {
     "angry"     : "assets/bg/autumn.webp"   
 })
 
-const haibara2 = new Character("Haibarae", {
-    "neutral"   : "assets/chars/haibara.webp",
+const conan = new Character("Edogawa Conan", {
+    "neutral"   : "assets/chars/conan.webp",
     "angry"     : "assets/bg/autumn.webp"   
 })
 
@@ -332,6 +335,8 @@ const scenes = {
         new Dialogue(haibara, "This is <b>Detective Mouri's Agency</b>!", null, "neutral"),
         new Dialogue(haibara, "<b>Detective Mouri</b> works and lives here along with his daughter <b>Ran</b>, ", null, "neutral"),
         new Dialogue(haibara, "Oh yeah, <b>Conan</b> also lives here!", null, "neutral"),
+        new Dialogue(conan, "Hi!, ", null, "neutral", null, () => {addCharToScene(conan, 80, -10)}),
+        new Dialogue(haibara, "Oh, hello!, ", null, "neutral"),
         new Dialogue(haibara, "People usually go here to resolve their <b>problems</b>, ", null, "neutral"),
         new Dialogue(haibara, "Like seriously, sometimes it's not even a case!, ", null, "neutral"),
         new Dialogue(haibara, "Anyways... lets continue! ", null, "neutral"),
@@ -423,7 +428,7 @@ function addCharToScene(char, x, y) {
         "y" : y
     })
     char.appear(x, y)
-    char.bounce()
+    
 }
 
 // function moveChar(char, x, y) {
