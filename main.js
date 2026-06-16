@@ -61,7 +61,7 @@ class Choice {
 
 let typingSpeed = 30
 class Dialogue {
-    constructor(char, text, choices, emotion, nextScene) {
+    constructor(char, text, choices, emotion, nextScene, func) {
         this.char = char
         this.text = text
         this.choices = null
@@ -72,6 +72,11 @@ class Dialogue {
         this.nextScene = null
         if (nextScene) {
             this.nextScene = nextScene
+        }
+
+        this.func = null
+        if (func) {
+            this.func = func
         }
 
         this.emotion = emotion
@@ -86,6 +91,11 @@ class Dialogue {
         dialogueTypeFinished = false
         dialogueTypeSkip = false
         nextBtn.style.display = "none"
+
+        if (this.func) {
+            this.func()
+        }
+
         for (let i = 0; i < this.text.length; i++) {
             setTimeout(() => {
                 if (cDialogueIndex == thisDialogueIndex && currentScene == thisScene && dialogueTypeSkip == false) {
@@ -137,8 +147,8 @@ class Dialogue {
             if (!char) {
                 continue
             }
-            this.char.img.style.animationName = ""
-            char.listen()
+            char.char.img.style.animationName = ""
+            char.char.listen()
         }
         this.char.talk()
         this.char.bounce()
@@ -159,16 +169,30 @@ class Character {
         this.img.offsetWidth
     }
 
-    appear(order) {
-        this.img.id = `character-${order}`
+    appear(x, y) {
+        this.img.classList.add("character")
+        this.img.style.left = x + "%"
+        this.img.style.bottom = y + "%"
         foreground.append(this.img)
     }
 
-    talk() {this.img.className = "talking"}
-    hide() {this.img.className = "hidden"; this.img.style.animationName = ""}
-    listen() {this.img.className = "listening"; this.img.style.animationName = ""}
-    normal() {this.img.className = "standing"; this.img.style.animationName = ""}
+    moveTo(x, y) {
+        this.img.style.left = x + "%"
+        this.img.style.bottom = y + "%"
+    }
+
+    removeOtherStates() {
+        this.img.classList.remove("talking", "hidden", "listening" ,"standing")
+    }
+
+    talk() {this.removeOtherStates(); this.img.classList.add("talking")}
+    hide() {this.removeOtherStates(); this.img.classList.add("hidden"); this.img.style.animationName = ""}
+    listen() {this.removeOtherStates(); this.img.classList.add("listening"); this.img.style.animationName = ""}
+    normal() {this.removeOtherStates(); this.img.classList.add("standing"); this.img.style.animationName = ""}
     bounce() {
+        this.img.style.animationName = ""
+        this.img.style.animationDuration = ""
+        this.img.offsetWidth
         this.img.style.animationName = "bounce"
         this.img.style.animationDuration = "200ms"
         this.img.offsetWidth
@@ -238,12 +262,16 @@ class Scene {
         }
         background.style.backgroundImage = this.bg
         console.log(this.bg)
-        foreground.innerHTML = ""
+        // foreground.innerHTML = ""
         for(let i = 0; i < this.characters.length; i++) {
             if (this.characters[i] == null) {
                 continue
             }
-            this.characters[i].appear(i + 1)
+            const cChar = this.characters[i]
+            if (cDialogueIndex <= 1) {
+                 this.characters[i].char.appear(cChar.x, cChar.y)
+            }   
+           
         }
 
         this.dialogues[cDialogueIndex - 1].display()
@@ -281,11 +309,11 @@ const haibara2 = new Character("Haibarae", {
 
 const scenes = {
     "start" : new Scene("assets/bg/beika.jpg", "assets/audio/chill.mp3", [
-        null,
-        null,
-        null,
-        null,
-        haibara
+        {
+            "char" : haibara,
+            "x" : 50,
+            "y" : -5
+        }
     ], [
         new Dialogue(haibara, "Hello there, welcome to <b>Beika!</b>", null, "neutral"),
         new Dialogue(haibara, "My name is <b>Haibara Ai</b>!", null, "neutral"),
@@ -295,10 +323,11 @@ const scenes = {
         new Dialogue(haibara, " ", null, "neutral", "MouriAgency"),
     ]),
     "MouriAgency" : new Scene("assets/bg/mouri2.png", "assets/audio/chill.mp3", [
-        haibara,
-        null,
-        null,
-        null
+        {
+            "char" : haibara,
+            "x" : 20,
+            "y" : -10
+        }
     ],[
         new Dialogue(haibara, "This is <b>Detective Mouri's Detective Agency</b>!", null, "neutral"),
         new Dialogue(haibara, "<b>Detective Mouri</b> works and lives here along with his daughter <b>Ran</b>, ", null, "neutral"),
@@ -314,24 +343,25 @@ const scenes = {
                 "text" : "Say that again?",
                 "outcome" : () => {changeNextScene("MouriAgency")}
             }]
-        ), "neutral"),
+        ), "neutral", null, () => {haibara.moveTo(50, -10)}),
         new Dialogue(haibara, "Alright!", null, "neutral"),
         new Dialogue(haibara, " ", null, "neutral", "start"),
     ]),
     "AgasaHouse" : new Scene("assets/bg/agasa.jpg", "assets/audio/chill.mp3", [
-        haibara,
-        null,
-        null,
-        null
+        {
+            "char" : haibara,
+            "x" : 20,
+            "y" : -10
+        }
     ],[
         new Dialogue(haibara, "Here it is!", null, "neutral"),
         new Dialogue(haibara, "The <b>myth</b>, ", null, "neutral"),
         new Dialogue(haibara, "The <b>legend</b>, ", null, "neutral"),
-        new Dialogue(haibara, "<b>My House!!!!!</b>, ", null, "neutral"),
-        new Dialogue(haibara, "Well, not really my house i guess, it's <b>Professor Agasa's House!!!</b>", null, "neutral"),
+        new Dialogue(haibara, "<b>My House!!!!!</b>, ", null, "neutral", null, () => {haibara.moveTo(50, -10)}),
+        new Dialogue(haibara, "Well, not really my house i guess, it's <b>Professor Agasa's House!!!</b>", null, "neutral", null, () => {haibara.moveTo(20, -10)}),
         new Dialogue(haibara, "Located at <b>2-22, Beika Town, Beika City,</b>", null, "neutral"),
         new Dialogue(haibara, "This is where I live after i shrunk into <b>Haibara.</b>", null, "neutral"),
-        new Dialogue(haibara, "Alr then where do you wanna go now? ", 
+        new Dialogue(haibara, "Alright then, where do you wanna go now? ", 
             new Choice([{
                 "text" : "Back to Kogoro pls",
                 "outcome" : () => {changeNextScene("MouriAgency")}
@@ -339,7 +369,7 @@ const scenes = {
                 "text" : "Say that again?",
                 "outcome" : () => {changeNextScene("AgasaHouse")}
             }]
-        ), "neutral"),
+        ), "neutral", null, () => {haibara.moveTo(50, -10)}),
         new Dialogue(haibara, "Alright!", null, "neutral"),
         new Dialogue(haibara, " ", null, "neutral", "start"),
     ])
@@ -384,6 +414,37 @@ function insertDialogue(array) {
         currentDialogues.push(dialogue)
     }
     next()
+}
+
+function addCharToScene(char, x, y) {
+    scenes[currentScene].characters.push({
+        "char" : char,
+        "x" : x,
+        "y" : y
+    })
+    char.appear(x, y)
+    char.bounce()
+}
+
+// function moveChar(char, x, y) {
+//     let chChar
+//     for (const character of scenes[currentScene].characters) {
+//         if (character.char == char) {
+//             chChar = character
+//         }
+//     }
+
+//     chChar.x = x
+//     chChar.y = y
+//     chChar.char.appear(x, y)
+// }
+
+function removeChar(char) {
+    for (let i = 0; i < scenes[currentScene].characters.length; i++) {
+        if (scenes[currentScene].characters[i].char == char) {
+            scenes[currentScene].characters.splice(i, 1)
+        }
+    }
 }
 
 function changeNextScene(scene) {

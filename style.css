@@ -186,6 +186,14 @@ body * img {
 
 /* characters */
 
+.character {
+    position: absolute;
+    width: auto;
+    height: 100%;
+    translate: -50% 0;
+    transition: 1s;
+}
+
 #character-1 {
     position: absolute;
     width: auto;
@@ -236,18 +244,22 @@ body * img {
 
 .talking {
     filter: brightness(100%);
+    z-index: 6;
 }
 
 .standing {
     filter: brightness(60%);
+    z-index: 5;
 }
 
 .listening {
     filter: brightness(30%);
+    z-index: 5;
 }
 
 .hidden {
     filter: brightness(0%);
+    z-index: 4;
 }
 
 /* effects */
