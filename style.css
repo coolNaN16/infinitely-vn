@@ -82,6 +82,11 @@ body * img {
     animation-name: bounce2;
     animation-duration: 0.2s;
     border: 0;
+    transition: 0.2s;
+}
+
+#nextBtn:hover {
+    transform: translateY(-5px);
 }
 
 #nameBox {
@@ -266,6 +271,48 @@ body * img {
 .hidden {
     filter: brightness(0%);
     z-index: 4;
+}
+
+/* SAVES */
+
+#controlPanel {
+    aspect-ratio: 1;
+    width: 5%;
+    border-top-right-radius: 30px;
+}
+
+#saveBtn {
+    width: 100%;
+    aspect-ratio: 1;
+    background-color: transparent;
+    border: 0;
+    transition: 0.1s ease;
+}
+
+#saveBtn img {
+    aspect-ratio: 1;
+    width: 100%;
+}
+
+#saveBtn:hover {
+    cursor: pointer;
+    transform: rotate(5deg) scale(1.1) translateX(5px);
+}
+
+#saveBtn:active {
+    transform: rotate(2deg) scale(1) translateX(0) translateY(1px);
+}
+
+#storageUI {
+    z-index: 1000;
+    position: absolute;
+    background-color: white;
+    width: 40%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
 }
 
 /* effects */
