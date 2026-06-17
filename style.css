@@ -271,6 +271,9 @@ body * img {
 /* effects */
 
 #overlay {
+    /* background-image: url("assets/bg/overlay.webp"); */
+    /* background-repeat: repeat; */
+
     position: fixed;
     inset: 0;
 
