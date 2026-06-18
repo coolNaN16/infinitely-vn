@@ -2,11 +2,9 @@
     <head>
         <title> VNWare </title>
         <link rel="stylesheet" type="text/css" href="style.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://googleapis.com" rel="stylesheet">
     </head>
     <script src="main.js" defer></script>
+    <script src="ui.js" defer></script>
     <body>
         <div id="bg"></div>
         <div id="fg">
@@ -27,14 +25,58 @@
             <button id="nextBtn"> ▼ </button>
         </div>
         <div id="controlPanel">
-            <button id="saveBtn"> <img src="assets/UI/save_icon.webp"> </button>
+            <button id="saveBtn" onclick="toggleStorageDisplay()"> <img src="assets/UI/save_icon.webp"> </button>
             <!-- <button id="loadBtn"> Load </button> -->
         </div>
         <div id="overlay">
 
         </div>
-        <div id="storageUI" style="display: none;">
+        <div id="storageUI" style="display:  none;">
+            <button id="storageBackBtn" onclick="toggleStorageDisplay()">◄ Close</button>
+            <h2 style="margin: 0; padding: 10px; color: rgb(116, 98, 122);">Saves</h2>
+            <hr style="width: 100%;">
 
+            <div id="storageRows">
+                <div class="storageSlot">
+                    <label> Slot 1 :</label>
+                    <input value="" id="Slot-1" readonly>
+                    <div style="display: flex; flex-direction: row; justify-content: flex-start; align-items: center; gap: 10px;">
+                        <button onclick="saveRun('Slot-1')"> Save </button>
+                        <button onclick="loadRun('Slot-1')"> Load </button>
+                    </div>
+                </div>
+
+                <div class="storageSlot">
+                    <label> Slot 2 :</label>
+                    <input value="" id="Slot-2" readonly>
+                    <div style="display: flex; flex-direction: row; justify-content: flex-start; align-items: center; gap: 10px;">
+                        <button onclick="saveRun('Slot-2')"> Save </button>
+                        <button onclick="loadRun('Slot-2')"> Load </button>
+                    </div>
+                </div>
+
+
+                <div class="storageSlot">
+                    <label> Slot 3 :</label>
+                    <input value="" id="Slot-3" readonly>
+                    <div style="display: flex; flex-direction: row; justify-content: flex-start; align-items: center; gap: 10px;">
+                        <button onclick="saveRun('Slot-3')"> Save </button>
+                        <button onclick="loadRun('Slot-3')"> Load </button>
+                    </div>
+                </div>
+
+                <div class="storageSlot">
+                    <label> Slot 4 :</label>
+                    <input value="" id="Slot-4" readonly>
+                    <div style="display: flex; flex-direction: row; justify-content: flex-start; align-items: center; gap: 10px;">
+                        <button onclick="saveRun('Slot-4')"> Save </button>
+                        <button onclick="loadRun('Slot-4')"> Load </button>
+                    </div>
+                </div>
+
+
+
+            </div>
         </div>
     </body>
 </html>

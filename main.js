@@ -280,6 +280,17 @@ class Scene {
         this.dialogues[cDialogueIndex - 1].display()
     }
 
+    loadChars() {
+        for(let i = 0; i < this.characters.length; i++) {
+            if (this.characters[i] == null) {
+                continue
+            }
+            const cChar = this.characters[i]
+
+            this.characters[i].char.appear(cChar.x, cChar.y)
+        }
+    }
+
     changeScene() {
         background.style.backgroundImage = this.bg
         foreground.innerHTML = ""
@@ -534,3 +545,94 @@ window.addEventListener("keyup", function(event) {
         typingSpeed = 30
     }
 })
+
+
+
+
+let saves = {// Scene - Dialogue - Date
+    "Slot-1" : ["", 0, ""],
+    "Slot-2" : ["", 0, ""],
+    "Slot-3" : ["", 0, ""],
+    "Slot-4" : ["", 0, ""],
+}
+
+if (localStorage.getItem('saves')) {
+    saves = JSON.parse(localStorage.getItem('saves'))
+}
+
+for (let i = 1; i <= 4; i++) {
+    console.log(i)
+    document.getElementById(`Slot-${i}`).value = saves[`Slot-${i}`][2]
+}
+
+function saveRun(slot) {
+
+    if (!dialogueTypeFinished) {
+
+        dialogueTypeSkip = true
+        dialogueTypeFinished = true
+
+        dialogueLabel.innerHTML = currentDialogues[cDialogueIndex - 1].text
+    }
+
+    const now = new Date()
+
+    const year = now.getFullYear()
+    const month = now.getMonth() + 1
+    const date = now.getDate()
+
+    const hour = now.getHours()
+    const minutes = now.getMinutes()
+    const sec = now.getSeconds()
+
+    function pad(num) {
+    return String(num).padStart(2, "0")
+    }
+
+    const stringDate =
+    `${pad(date)}-${pad(month)}-${year}, ` +
+    `${pad(hour)}:${pad(minutes)}:${pad(sec)}`
+
+    console.log(stringDate)
+
+    saves[slot][0] = currentScene
+    saves[slot][1] = cDialogueIndex - 1
+    saves[slot][2] = stringDate
+
+    document.getElementById(slot).value = stringDate
+
+    localStorage.setItem("saves", JSON.stringify(saves))
+}
+
+function loadRun(slot) {
+
+    // toggleStorageDisplay()
+
+    currentScene = saves[slot][0]
+    cDialogueIndex = saves[slot][1]
+    
+    if (cDialogueIndex <= 0) {
+        cDialogueIndex = 1
+    }
+
+    currentDialogues = scenes[currentScene].dialogues
+    
+    slidein()
+
+    setTimeout(function() {
+        scenes[currentScene].changeScene()
+        
+        slideout()
+
+        setTimeout(function() {
+            // scenes[currentScene].draw()
+
+            canContinue = true
+            lastDialogue = 0
+
+            scenes[currentScene].loadChars()
+            bgMusic.currentTime = 0
+            next()
+        }, 500)
+    }, 1500)
+}
