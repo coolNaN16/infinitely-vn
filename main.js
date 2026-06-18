@@ -5,6 +5,7 @@ const nameLabel = document.getElementById("nameLabel")
 const overlay = document.getElementById("overlay")
 const choiceBox = document.getElementById("choiceBox")
 const nextBtn = document.getElementById("nextBtn")
+const mainMenu = document.getElementById("mainMenu")
 
 const dialogueCD = 0.3
 let lastDialogue = Date.now()
@@ -206,16 +207,37 @@ let musicChanging = false
 let currentBgMusic = ""
 let musicVolume = 0.3
 let bgMusic = new Audio()
+bgMusic.id = "bgm"
 
 bgMusic.volume = musicVolume
 bgMusic.loop = true
 
+function getPermission() {
+    currentBgMusic = "assets/audio/chill.mp3"
+    bgMusic.src = currentBgMusic
+    bgMusic.currentTime = 0
+    bgMusic.play()
+}
 
 function fadeToMute(callback) {
     let interval = setInterval(() => {
         bgMusic.volume = Math.max(0, bgMusic.volume - 0.01)
 
         if (bgMusic.volume <= 0) {
+            clearInterval(interval)
+
+            if (callback) {
+                callback()
+            }
+        }
+    }, 10)
+}
+
+function fadeToHalf(callback) {
+    let interval = setInterval(() => {
+        bgMusic.volume = Math.max(0, bgMusic.volume - 0.01)
+
+        if (bgMusic.volume <= bgMusic.volume / 2) {
             clearInterval(interval)
 
             if (callback) {
@@ -635,4 +657,38 @@ function loadRun(slot) {
             next()
         }, 500)
     }, 1500)
+}
+
+function newGame() {
+    currentScene = "start"
+    cDialogueIndex = 0
+    currentDialogues = []
+    canContinue = true
+    dialogueTypeFinished = true
+
+    mainMenu.style.transform = "translateX(-100%)"
+    slidein()
+    fadeToMute()
+    setTimeout(function() {
+        
+        bgMusic.currentTime = 0
+        mainMenu.style.display = "none"
+        document.getElementById("menuBg").style.display = "none"
+        
+    }, 1000)
+
+    setTimeout(function() {
+        slideout()
+        scenes[currentScene].changeScene()
+        setTimeout(function() {
+            fadeToVolume()
+            next()
+        }, 500)
+    }, 1500)
+    
+    document.getElementById("blocker").style.display = "none"
+    
+
+
+
 }

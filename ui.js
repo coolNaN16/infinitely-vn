@@ -12,6 +12,7 @@ function toggleStorageDisplay() {
         }, 500)
         
     } else {
+        fadeToHalf()
         storage.style.display = "flex"
         blur.style.display = "block"
         
@@ -25,6 +26,7 @@ function toggleStorageDisplay() {
         cpanel.style.display = "block"
 
         requestAnimationFrame(() => {
+            fadeToVolume()
             cpanel.style.translate = "0 0"
         })
     } else {
@@ -36,3 +38,43 @@ function toggleStorageDisplay() {
 }
 
 // window.toggleStorageDisplay = toggleStorageDisplay()
+
+function fadeToMute(callback) {
+    let interval = setInterval(() => {
+        bgMusic.volume = Math.max(0, bgMusic.volume - 0.01)
+
+        if (bgMusic.volume <= 0) {
+            clearInterval(interval)
+
+            if (callback) {
+                callback()
+            }
+        }
+    }, 10)
+}
+
+function fadeToHalf(callback) {
+    let interval = setInterval(() => {
+        bgMusic.volume = Math.max(0, bgMusic.volume - 0.01)
+
+        if (bgMusic.volume <= 0.05) {
+            clearInterval(interval)
+
+            if (callback) {
+                callback()
+            }
+        }
+    }, 10)
+}
+
+
+function fadeToVolume() {
+    for (let i = 0; i < 100; i++) {
+        setTimeout(function() {
+            console.log(bgMusic.volume)
+            if (bgMusic.volume < musicVolume) {
+                bgMusic.volume += 0.01
+            }
+        }, 10 * i)
+    }
+}
