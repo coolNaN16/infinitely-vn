@@ -219,6 +219,17 @@ function getPermission() {
     bgMusic.play()
 }
 
+function changeMusic(source) {
+    fadeToMute()
+    setTimeout(function() {
+        currentBgMusic = source
+        bgMusic.src = source
+        bgMusic.currentTime = 0
+        bgMusic.play()
+        fadeToVolume()
+    }, 1000)
+}
+
 function fadeToMute(callback) {
     let interval = setInterval(() => {
         bgMusic.volume = Math.max(0, bgMusic.volume - 0.01)

@@ -37,6 +37,23 @@ function toggleStorageDisplay() {
     }
 }
 
+function toggleAudioPerm() {
+    const ele = document.getElementById("audioPermission")
+    const children = ele.children
+
+    ele.style.opacity = 0
+    for (const child of children) {
+        child.style.transform = "translateY(100%)"
+        setTimeout(function() {
+            child.style.display = "none"
+        }, 1000)
+    }
+
+    setTimeout(function() {
+        ele.remove()
+    }, 1000)
+}
+
 // window.toggleStorageDisplay = toggleStorageDisplay()
 
 function fadeToMute(callback) {

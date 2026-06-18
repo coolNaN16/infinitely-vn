@@ -80,14 +80,16 @@
         <div id="overlay"></div>
         <div id="blur"></div>
         <div id="blocker"></div>
-
-        <div id="audioPermission">
-            <button onclick="getPermission(); document.getElementById('audioPermission').remove()"> Enter! </button>
-        </div>
         <div id="menuBg"></div>
 
+        <div id="audioPermission">
+            <h3 style="transition: 1s;">Welcome to my VN Framework demo!, this was made using HTML, CSS, and JS. <br> This is not an actual visual novel (yet), so don't expect a story here, <br> Anyways... enjoy your stay!!!</h3>
+            <button onclick="getPermission(); toggleAudioPerm()"> Enter! </button>
+        </div>
+        
+
         <div id="mainMenu">
-            <h1 style="font-size: 3vw; margin: 0; color: rgb(127, 102, 136); font-family: 'Agbalumo';"> Lorem Ipsum. </h1>
+            <h1 style="font-size: 3vw; margin: 0; color: rgb(127, 102, 136); font-family: 'Audiowide';"> Lorem Ipsum. </h1>
             <hr>
             <div style="display: flex; flex-direction: column; gap: 15px; width: 100%; align-items: flex-start;">
                 <button onclick="newGame()"> ► New Game </button>
