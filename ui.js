@@ -97,18 +97,18 @@ function fadeToVolume() {
 }
 
 async function lockLandscape() {
-    // try {
-    //     // 1. Request fullscreen mode
-    //     if (!document.fullscreenElement) {
-    //     await document.documentElement.requestFullscreen();
-    //     }
+    try {
+        // 1. Request fullscreen mode
+        if (!document.fullscreenElement) {
+        await document.documentElement.requestFullscreen();
+        }
         
-    //     // 2. Lock the screen orientation
-    //     await screen.orientation.lock("landscape");
-    //     console.log("Orientation locked to landscape!");
-    // } catch (error) {
-    //     console.error("Locking failed: ", error);
-    // }
+        // 2. Lock the screen orientation
+        await screen.orientation.lock("landscape");
+        console.log("Orientation locked to landscape!");
+    } catch (error) {
+        console.error("Locking failed: ", error);
+    }
 }
 
 // Unlock later if needed
