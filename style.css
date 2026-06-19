@@ -434,6 +434,22 @@ hr {
 
 /* MAIN MENU */
 
+#mainTitle {
+    text-decoration: underline;
+    font-size: 3.5vw; 
+    white-space: nowrap;
+    box-shadow: -8px 8px 0px 0px rgba(0, 0, 0, 0.5);
+    width: 110%;
+    margin: 0; 
+    color: white; 
+    font-family: 'Agbalumo';
+    background-color: rgb(134, 112, 154);
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 10px;
+    padding: 2px;
+    padding-left: 10px;
+    padding-right: 30px;
+}
 
 #mainMenu {
     text-align: left;
@@ -442,12 +458,13 @@ hr {
 
     z-index: 998;
     position: absolute;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.1);
+    /* background-color: transparent; */
     backdrop-filter: blur(3px);
-    width: 35%;
+    width: 30%;
     height: 100%;
     top: 0;
-    left: 0;
+    left: 7%;
     /* border-top-right-radius: 30%;
     border-bottom-right-radius: 30%; */
     
@@ -457,9 +474,8 @@ hr {
     justify-content: center;
     gap: 15px;
 
-    border-right: 10px solid rgb(180, 147, 192);
-    border-top: 10px solid rgb(180, 147, 192);
-    border-bottom: 10px solid rgb(180, 147, 192);
+    /* border-right: 1px solid rgb(180, 147, 192);
+    border-left: 1px solid rgb(180, 147, 192); */
 
     padding: 50px;
 
@@ -472,19 +488,28 @@ hr {
 
 #mainMenu button {
     text-align: left;
-    padding-left: 50px;
-    font-family: "Montserrat";
-    font-size: medium;
+    padding: 5px;
+    font-family: "Commissioner";
+    font-weight: 500;
+    font-size: large;
     color: white;
-    border: 3px solid rgb(98, 64, 102);
+    /* border: 1px solid rgb(98, 64, 102); */
+    border: 0;
+    /* border: 0; */
     border-radius: 5px;
-    border-top-left-radius: 100px;
-    border-bottom-right-radius: 100px;
-    background-color: rgb(180, 147, 192);
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 10px;
+    /* border-top-left-radius: 100px;
+    border-bottom-right-radius: 100px; */
+    background-color: rgb(168, 141, 177);
+    /* background-color: rgb(255, 235, 105); */
+    /* background-color: transparent; */
     font-weight: 500;
     width: 70%;
     aspect-ratio: 5;
     transition: 0.2s;
+
+    box-shadow: -8px 8px 0px 0px rgba(0, 0, 0, 0.5);
 }
 
 
@@ -493,13 +518,32 @@ hr {
     font-weight: bold;
     filter: brightness(105%);
     transform: translateX(20px);
+    transition: 0.2s;
 }
+
 
 #mainMenu button:active {
     font-weight: bold;
     filter: brightness(90%);
-    transform: scale(0.95);
+    transform: translateX(0);
 }
+
+#menuBtnContainer {
+    box-sizing: border-box;
+    padding: 20px;
+    display: flex; 
+    flex-direction: column; 
+    gap: 15px; 
+    width: 100%; 
+    align-items: flex-start; 
+    /* background-color: rgb(174, 147, 183);
+
+    border-radius: 10px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px; */
+}
+
+
 
 /* effects */
 
@@ -533,7 +577,8 @@ hr {
 
 #menuBg {
     /* display: none; */
-    background-image: url(assets/bg/beika.jpg);
+    filter:contrast(100%);
+    background-image: url(assets/bg/police.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     position: fixed;
@@ -645,11 +690,8 @@ hr {
     }
 
     #mainMenu button {
-        padding-left: 20px;
+        aspect-ratio: 4;
         font-size: small;
-        border-radius: 5px;
-        border-top-left-radius: 40px;
-        border-bottom-right-radius: 40px;
     }
 
     #dialogueBox {

@@ -355,7 +355,7 @@ const conan = new Character("Edogawa Conan", {
 
 
 const scenes = {
-    "start" : new Scene("assets/bg/beika.jpg", "assets/audio/chill.mp3", [
+    "start" : new Scene("assets/bg/police.jpg", "assets/audio/chill.mp3", [
         {
             "char" : haibara,
             "x" : 50,
