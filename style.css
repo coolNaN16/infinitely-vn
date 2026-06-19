@@ -125,26 +125,7 @@ body * img {
     margin: 0;
 }
 
-/* CONTROL PANEL */
 
-#controlPanel {
-    z-index: 1000;
-    box-sizing: border-box;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding: 5px;
-    aspect-ratio: 1;
-    width: 5%;
-    height: auto;
-    background-color: white;
-    display: block;
-    flex-direction: column;
-    gap: 5px;
-    align-items: center;
-    justify-content: center;
-    transition: 0.2s;
-}
 
 /* CHOICES */
 
@@ -283,13 +264,30 @@ body * img {
 
 /* SAVES */
 
+/* CONTROL PANEL */
+
 #controlPanel {
-    aspect-ratio: 1;
+    z-index: 1000;
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 5px;
     width: 5%;
+    height: auto;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    justify-content: flex-end;
+    transition: 0.2s;
+    aspect-ratio: 0.5;
     border-top-right-radius: 30px;
 }
 
-#saveBtn {
+#controlPanel button {
+    padding: 5px;
     z-index: 1000;
     width: 100%;
     aspect-ratio: 1;
@@ -298,17 +296,17 @@ body * img {
     transition: 0.1s ease;
 }
 
-#saveBtn img {
+#controlPanel button img {
     aspect-ratio: 1;
     width: 100%;
 }
 
-#saveBtn:hover {
+#controlPanel button:hover {
     cursor: pointer;
     transform: rotate(5deg) scale(1.1) translateX(5px);
 }
 
-#saveBtn:active {
+#controlPanel button:active {
     transform: rotate(2deg) scale(1) translateX(0) translateY(1px);
 }
 

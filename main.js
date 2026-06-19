@@ -526,6 +526,7 @@ function changeNextScene(scene) {
 
 function next() {
     saveRun('CSlot')
+    inMenu = false
     if (scenes[currentScene] && canContinue == true) {
         if (Date.now() - lastDialogue >= dialogueCD * 1000 && dialogueTypeFinished == true) {
             lastDialogue = Date.now()
@@ -713,4 +714,31 @@ function newGame() {
 
 
 
+}
+
+let inMenu = true
+function returnToMenu() {
+    if (inMenu) return
+
+    saveRun("CSlot")
+    slidein()
+    fadeToMute()
+    
+    setTimeout(function() {
+        mainMenu.style.display = "flex"
+        mainMenu.style.transform = "translateX(0)"
+        changeMusic("assets/audio/chill.mp3")
+
+        document.getElementById("menuBg").style.display = "block"
+        
+    }, 1000)
+
+    setTimeout(function() {
+        slideout()
+        setTimeout(function() {
+            fadeToVolume()
+        }, 500)
+    }, 1500)
+    
+    document.getElementById("blocker").style.display = "block"
 }
