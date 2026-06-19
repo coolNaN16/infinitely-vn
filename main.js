@@ -525,6 +525,7 @@ function changeNextScene(scene) {
 }
 
 function next() {
+    saveRun('CSlot')
     if (scenes[currentScene] && canContinue == true) {
         if (Date.now() - lastDialogue >= dialogueCD * 1000 && dialogueTypeFinished == true) {
             lastDialogue = Date.now()
@@ -587,6 +588,7 @@ let saves = {// Scene - Dialogue - Date
     "Slot-2" : ["", 0, ""],
     "Slot-3" : ["", 0, ""],
     "Slot-4" : ["", 0, ""],
+    "CSlot"  : ["start", 0, "now"]
 }
 
 if (localStorage.getItem('saves')) {
@@ -598,9 +600,13 @@ for (let i = 1; i <= 4; i++) {
     document.getElementById(`Slot-${i}`).value = saves[`Slot-${i}`][2]
 }
 
-function saveRun(slot) {
 
-    if (!dialogueTypeFinished) {
+function saveRun(slot) {
+    if (!saves[slot]) {
+        saves[slot] = [currentScene, cDialogueIndex, 0]
+    }
+
+    if (!dialogueTypeFinished && slot != "CSlot") {
 
         dialogueTypeSkip = true
         dialogueTypeFinished = true
@@ -632,8 +638,10 @@ function saveRun(slot) {
     saves[slot][1] = cDialogueIndex - 1
     saves[slot][2] = stringDate
 
-    document.getElementById(slot).value = stringDate
-
+    if (document.getElementById(slot)) {
+        document.getElementById(slot).value = stringDate
+    }   
+    
     localStorage.setItem("saves", JSON.stringify(saves))
 }
 
@@ -651,23 +659,26 @@ function loadRun(slot) {
     currentDialogues = scenes[currentScene].dialogues
     
     slidein()
-
+    mainMenu.style.transform = "translateX(-100%)"
     setTimeout(function() {
         scenes[currentScene].changeScene()
         
         slideout()
+        mainMenu.style.display = "none"
+        document.getElementById("menuBg").style.display = "none"
 
         setTimeout(function() {
             // scenes[currentScene].draw()
 
             canContinue = true
             lastDialogue = 0
-
             scenes[currentScene].loadChars()
             bgMusic.currentTime = 0
             next()
         }, 500)
     }, 1500)
+
+    document.getElementById("blocker").style.display = "none"
 }
 
 function newGame() {
