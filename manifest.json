@@ -1,0 +1,9 @@
+{
+  "name": "Infinitely VN",
+  "short_name": "Inf-VN",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#000000",
+  "theme_color": "#000000"
+}
