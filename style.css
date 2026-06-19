@@ -62,6 +62,10 @@ body * img {
     border-bottom-right-radius: 30px;
 }
 
+#dialogueBox:hover {
+    cursor: pointer;
+}
+
 #dialogueLabel {
     margin: 15px;
     padding-bottom: 10px;
@@ -485,6 +489,7 @@ hr {
 
 
 #mainMenu button:hover {
+    cursor: pointer;
     font-weight: bold;
     filter: brightness(105%);
     transform: translateX(20px);
