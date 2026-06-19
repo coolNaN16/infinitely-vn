@@ -685,8 +685,12 @@ hr {
 @media only screen and (max-height: 820px) and (max-width: 1180px) and (orientation: landscape) {
     #dialogueLabel {
         padding: 0;
-        font-size: larger;
+        font-size: small;
         
+    }
+
+    #nameLabel {
+        font-size: smaller;
     }
 
     #mainMenu button {
