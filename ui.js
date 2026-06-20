@@ -1,6 +1,7 @@
-function toggleStorageDisplay() {
+function toggleSidebarDisplay(id) {
+    chosenVolume = document.getElementById("volumeInput").value
     const blur = document.getElementById("blur")
-    const storage = document.getElementById("storageUI")
+    const storage = document.getElementById(id)
     const cpanel = document.getElementById("controlPanel")
     if (storage.style.display == "flex") {
         storage.style.translate = "-100% 0"
@@ -23,7 +24,7 @@ function toggleStorageDisplay() {
     }
 
     if (cpanel.style.display == "none") {
-        cpanel.style.display = "block"
+        cpanel.style.display = "flex"
 
         requestAnimationFrame(() => {
             fadeToVolume()
@@ -34,6 +35,33 @@ function toggleStorageDisplay() {
         setTimeout(function() {
             cpanel.style.display = "none"
         }, 200)
+    }
+}
+
+function hideSidebarDisplay(id) {
+    const blur = document.getElementById("blur")
+    const storage = document.getElementById(id)
+    const cpanel = document.getElementById("controlPanel")
+    if (storage.style.display == "flex") {
+        storage.style.translate = "-100% 0"
+        blur.style.opacity = 0
+
+        setTimeout(function() {
+            storage.style.display = "none"
+            blur.style.display = "none"
+        }, 500)
+        
+    } else {
+    }
+
+    if (cpanel.style.display == "none") {
+        cpanel.style.display = "flex"
+
+        requestAnimationFrame(() => {
+            fadeToVolume()
+            cpanel.style.translate = "0 0"
+        })
+    } else {
     }
 }
 
@@ -120,3 +148,20 @@ function unlockOrientation() {
 }
 
 
+const hvrBtns = document.querySelectorAll("button")
+const hvrSound = new Audio("assets/audio/click3.mp3")
+const clkSound = new Audio("assets/audio/click5.mp3")
+hvrSound.volume = 0.3
+
+for (const btn of hvrBtns) {
+    btn.addEventListener("mouseenter", function() {
+        hvrSound.src = `assets/audio/click${3}.mp3`
+        hvrSound.currentTime = 0
+        hvrSound.play()
+    })
+
+    btn.addEventListener("pointerdown", function() {
+        // clkSound.currentTime = 0
+        // clkSound.play()
+    })
+}

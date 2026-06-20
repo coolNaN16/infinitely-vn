@@ -282,7 +282,7 @@ body * img {
     align-items: center;
     justify-content: flex-end;
     transition: 0.2s;
-    aspect-ratio: 0.5;
+    aspect-ratio: 0.3;
     border-top-right-radius: 30px;
 }
 
@@ -338,27 +338,57 @@ body * img {
     
 }
 
-#storageBackBtn {
+#settingsRows {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    padding: 10px;
+}
+
+#settingsRows div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+#settingsRows div input {
+    width: 100%;
+}
+
+
+
+#backBtn {
     /* color: rgb(116, 98, 122); */
     font-family: "Fira Sans";
-    aspect-ratio: 2;
+    aspect-ratio: 5;
     position: absolute;
     font-size: large;
     right: 7%;
     top: 3%;
     background-color: transparent;
     border: 0;
-    transition: 0.5s;
+    transition: 0.1s;
 }
 
-#storageBackBtn:hover {
+#backBtn:hover {
     cursor: pointer;
     transform: translateX(5px);
+    transition: 0.1s;
 }
 
-#storageBackBtn:active {
-    transition: 0.2s;
-    transform: translateX(-15px);
+#backBtn:active {
+    transition: 0.1s;
+    transform: translateX(0px);
 }
 
 hr {
@@ -639,6 +669,34 @@ hr {
     transform: scale(0.95);
 }
 
+/* CLASSES */
+
+.sideBar {
+    text-align: left;
+
+    box-sizing: border-box;
+
+    z-index: 1000;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 30%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    padding: 10px;
+
+    translate: -100% 0;
+    
+    transition: 0.5s;
+
+}
 
 /* anims */
 

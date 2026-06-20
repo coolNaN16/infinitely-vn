@@ -139,6 +139,8 @@ class Dialogue {
         }
         if (this.choices) {
             this.choices.displayChoice()
+        } else {
+            choiceBox.style.display = "none"
         }
 
 
@@ -153,7 +155,7 @@ class Dialogue {
         }
         this.char.talk()
         this.char.bounce()
-        this.char.img.src = this.char.sprites[this.emotion]
+        this.char.img.src = `${this.char.sprites}/${this.emotion}.webp`
     }
 }
 
@@ -165,7 +167,7 @@ class Character {
         this.state = "listening"
 
         this.img = document.createElement("img")
-        this.img.src = this.sprites.neutral
+        this.img.src = `${this.sprites}/neutral.webp`
         this.img.className = "standing"
         this.img.offsetWidth
     }
@@ -205,7 +207,7 @@ class Character {
 
 let musicChanging = false
 let currentBgMusic = ""
-let musicVolume = 0.3
+let musicVolume = document.getElementById("volumeInput").value / 100
 let bgMusic = new Audio()
 bgMusic.id = "bgm"
 
@@ -230,44 +232,43 @@ function changeMusic(source) {
     }, 1000)
 }
 
-function fadeToMute(callback) {
-    let interval = setInterval(() => {
-        bgMusic.volume = Math.max(0, bgMusic.volume - 0.01)
+// function fadeToMute(callback) {
+//     let interval = setInterval(() => {
+//         bgMusic.volume = Math.max(0, bgMusic.volume - 0.01)
 
-        if (bgMusic.volume <= 0) {
-            clearInterval(interval)
+//         if (bgMusic.volume <= 0) {
+//             clearInterval(interval)
 
-            if (callback) {
-                callback()
-            }
-        }
-    }, 10)
-}
+//             if (callback) {
+//                 callback()
+//             }
+//         }
+//     }, 10)
+// }
 
-function fadeToHalf(callback) {
-    let interval = setInterval(() => {
-        bgMusic.volume = Math.max(0, bgMusic.volume - 0.01)
+// function fadeToHalf(callback) {
+//     let interval = setInterval(() => {
+//         bgMusic.volume = Math.max(0, bgMusic.volume - 0.01)
 
-        if (bgMusic.volume <= bgMusic.volume / 2) {
-            clearInterval(interval)
+//         if (bgMusic.volume <= bgMusic.volume / 2) {
+//             clearInterval(interval)
 
-            if (callback) {
-                callback()
-            }
-        }
-    }, 10)
-}
+//             if (callback) {
+//                 callback()
+//             }
+//         }
+//     }, 10)
+// }
 
-function fadeToVolume() {
-    for (let i = 0; i < 100; i++) {
-        setTimeout(function() {
-            console.log(bgMusic.volume)
-            if (bgMusic.volume < musicVolume) {
-                bgMusic.volume += 0.01
-            }
-        }, 10 * i)
-    }
-}
+// function fadeToVolume() {
+//     for (let i = 0; i < 100; i++) {
+//         setTimeout(function() {
+//             if (bgMusic.volume < musicVolume) {
+//                 bgMusic.volume += 0.01
+//             }
+//         }, 10 * i)
+//     }
+// }
 
 class Scene {
     constructor(bg, music, characters, dialogues) {
@@ -343,15 +344,9 @@ class Scene {
 }
 
 
-const haibara = new Character("Haibara Ai", {
-    "neutral"   : "assets/chars/haibara.webp",
-    "angry"     : "assets/bg/autumn.webp"   
-})
+const haibara = new Character("Haibara Ai", "assets/chars/haibara")
 
-const conan = new Character("Edogawa Conan", {
-    "neutral"   : "assets/chars/conan.webp",
-    "angry"     : "assets/bg/autumn.webp"   
-})
+const conan = new Character("Edogawa Conan", "assets/chars/conan")
 
 
 const scenes = {
@@ -446,7 +441,6 @@ function slideout() {
     overlay.offsetWidth
     for (let i = 0; i < 100; i++) {
         setTimeout(function() {
-            console.log(bgMusic.volume)
             if (bgMusic.volume < musicVolume) {
                 bgMusic.volume += 0.01
             }
@@ -594,6 +588,8 @@ let saves = {// Scene - Dialogue - Date
 
 if (localStorage.getItem('saves')) {
     saves = JSON.parse(localStorage.getItem('saves'))
+} else {
+    localStorage.setItem("saves", saves)
 }
 
 for (let i = 1; i <= 4; i++) {
@@ -648,7 +644,7 @@ function saveRun(slot) {
 
 function loadRun(slot) {
 
-    // toggleStorageDisplay()
+    hideSidebarDisplay(`storageUI`)
 
     currentScene = saves[slot][0]
     cDialogueIndex = saves[slot][1]
@@ -738,7 +734,7 @@ function returnToMenu() {
         setTimeout(function() {
             fadeToVolume()
         }, 500)
-    }, 1500)
+    }, 2000)
     
     document.getElementById("blocker").style.display = "block"
 }

@@ -2,11 +2,13 @@
     <head>
         <title> VNWare </title>
         <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="defaults.css">
         <link rel="manifest" href="/manifest.json">
         <!-- <meta name="viewport" content="width=device-width, initial-scale=2.0"> -->
     </head>
     <script src="main.js" defer></script>
     <script src="ui.js" defer></script>
+    <script src="settings.js" defer></script>
     <body>
         <div id="bg"></div>
         <div id="fg">
@@ -27,13 +29,14 @@
             <button id="nextBtn"> ▼ </button>
         </div>
         <div id="controlPanel">
-            <button id="returnBtn" onclick="returnToMenu()"> <img src="assets/UI/exit.webp"> </button>
-            <button id="saveBtn" onclick="toggleStorageDisplay()"> <img src="assets/UI/save_icon.webp"> </button>
+            <button id="returnBtn" class="hoverSound" onclick="returnToMenu()"> <img src="assets/UI/exit.webp"> </button>
+            <button id="settingsBtn" class="hoverSound" onclick="toggleSidebarDisplay(`settingsUI`)"><img src="assets/UI/settings.webp"></button>
+            <button id="saveBtn" class="hoverSound" onclick="toggleSidebarDisplay(`storageUI`)"> <img src="assets/UI/save_icon.webp"> </button>
             <!-- <button id="loadBtn"> Load </button> -->
         </div>
         
-        <div id="storageUI" style="display:  none;">
-            <button id="storageBackBtn" onclick="toggleStorageDisplay()">◄ Close</button>
+        <div id="storageUI" class="sideBar" style="display:  none;">
+            <button id="backBtn" onclick="toggleSidebarDisplay(`storageUI`)">◄ Close</button>
             <h2 style="margin: 0; padding: 10px; color: rgb(116, 98, 122);">Saves</h2>
             <hr style="width: 100%;">
 
@@ -80,6 +83,18 @@
             </div>
         </div>
 
+        <div id="settingsUI" class="sideBar" style="display:  none;">
+            <button id="backBtn" onclick="toggleSidebarDisplay(`settingsUI`); applySettings()">◄ Close and apply</button>
+            <h2 style="margin: 0; padding: 10px; color: rgb(116, 98, 122);">Settings</h2>
+            <hr style="width: 100%;">
+            <div id="settingsRows">
+                <div>
+                    <label for="volumeInput" id="volumeLabel"> Music volume:  </label>
+                    <input id="volumeInput" type="range" min="0" max="100" value="30">
+                </div>
+            </div>
+        </div>
+
         <div id="overlay"></div>
         <div id="blur"></div>
         <div id="blocker"></div>
@@ -87,7 +102,7 @@
 
         <div id="audioPermission">
             <h3 style="transition: 1s;">Welcome to my VN Framework demo!, this was made using HTML, CSS, and JS. <br> This is not an actual visual novel (yet), so don't expect a story here, <br> Anyways... enjoy your stay!!!</h3>
-            <button onclick="getPermission(); toggleAudioPerm(); lockLandscape()"> Enter! </button>
+            <button onclick="getPermission(); toggleAudioPerm(); lockLandscape();"> Enter! </button>
         </div>
         
 
