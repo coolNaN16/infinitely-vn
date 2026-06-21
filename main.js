@@ -12,6 +12,7 @@ let lastDialogue = Date.now()
 let dialogueTypeFinished = true
 let dialogueTypeSkip = false
 let canContinue = true
+let auto = false
 
 function getInt(min, max) {
   const minCeiled = Math.ceil(min);
@@ -114,6 +115,13 @@ class Dialogue {
                     dialogueTypeFinished = true
                     nextBtn.style.display = "block"
                     nextBtn.offsetHeight
+
+                    if (auto == true) {
+                        setTimeout(function() {
+                            
+                            next()
+                        }, 700)
+                    }
 
                     if (this.nextScene) {
                         currentScene = this.nextScene
@@ -455,7 +463,23 @@ function changeNextScene(scene) {
     // }, 1500)
 }
 
+const autoNotice = document.getElementById("noticeLabel")
+function toggleAutoPlay() {
+    
+    if (auto == true) {
+        auto = false
+        autoNotice.style.opacity = 0
+    } else {
+        auto = true
+        autoNotice.style.opacity = 1
+        next()
+    }
+
+    console.log(auto)
+}
+
 function next() {
+
     saveRun('CSlot')
     inMenu = false
     if (scenes[currentScene] && canContinue == true) {
@@ -464,6 +488,7 @@ function next() {
             currentDialogues = scenes[currentScene].dialogues
             console.log(cDialogueIndex)
             console.log(currentDialogues.length)
+
             if (cDialogueIndex < currentDialogues.length) {
                 cDialogueIndex += 1 
             } else {
@@ -494,7 +519,7 @@ function next() {
     }
 }
 
-document.getElementById("dialogueBox").addEventListener("pointerdown", function(event) {
+document.getElementById("dialogueLabel").addEventListener("pointerdown", function(event) {
     next()
 })
 
