@@ -1,5 +1,6 @@
 function toggleSidebarDisplay(id) {
     chosenVolume = document.getElementById("volumeInput").value
+    bgMusic.volume = chosenVolume / 100
     const blur = document.getElementById("blur")
     const storage = document.getElementById(id)
     const cpanel = document.getElementById("controlPanel")
@@ -114,6 +115,7 @@ function fadeToHalf(callback) {
 
 
 function fadeToVolume() {
+    console.log("fadingtovolume...")
     for (let i = 0; i < 100; i++) {
         setTimeout(function() {
             console.log(bgMusic.volume)
@@ -151,7 +153,7 @@ function unlockOrientation() {
 const hvrBtns = document.querySelectorAll("button")
 const hvrSound = new Audio("assets/audio/click3.mp3")
 const clkSound = new Audio("assets/audio/click5.mp3")
-hvrSound.volume = 0.3
+hvrSound.volume = 0.1
 
 for (const btn of hvrBtns) {
     btn.addEventListener("mouseenter", function() {

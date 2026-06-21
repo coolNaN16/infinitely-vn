@@ -104,6 +104,9 @@ class Dialogue {
                     if (i < this.text.length - 1) {
                         dialogueLabel.innerHTML = this.text.slice(0, i)
                     } else {dialogueLabel.innerHTML = this.text}
+                    for (const audio of clickAudios) {
+                        audio.volume = document.getElementById("typeVolumeInput").value / 100
+                    }
                     clickAudios[getInt(0, 1)].play()
                     // clickAudios[0].play()
                 }
@@ -437,11 +440,15 @@ function slidein() {
 }
 
 function slideout() {
+    
     overlay.style.animationName = "fade-out"
     overlay.offsetWidth
+    musicVolume = document.getElementById("volumeInput").value / 100
     for (let i = 0; i < 100; i++) {
         setTimeout(function() {
+            
             if (bgMusic.volume < musicVolume) {
+                console.log(bgMusic.volume, " VOL")
                 bgMusic.volume += 0.01
             }
         }, 10 * i)
