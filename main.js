@@ -120,7 +120,7 @@ class Dialogue {
                         setTimeout(function() {
                             
                             next()
-                        }, 700)
+                        }, 600)
                     }
 
                     if (this.nextScene) {

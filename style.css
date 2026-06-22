@@ -62,7 +62,7 @@ body * img {
     border-bottom-right-radius: 30px;
 }
 
-#dialogueBox:hover {
+#dialogueLabel:hover {
     cursor: pointer;
 }
 
@@ -130,7 +130,8 @@ body * img {
     font-size: xx-small;
     position: absolute;
     bottom: 0%;
-    left: 5%;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 #dialogueControlPanel {
@@ -807,9 +808,27 @@ hr {
     }
 
     #dialogueBox {
-        border-top-right-radius: 20px;
+        border-top-right-radius: 0;
         border-bottom-left-radius: 20px;
         border-bottom-right-radius: 20px;
+    }
+
+    #dialogueControlPanel button {
+        padding: 0;
+    }
+
+    #dialogueControlPanel {
+        height: auto;
+        width: 7%;
+    }
+
+    #controlPanel button {
+        padding: 0;
+    }
+
+    #backBtn {
+        top: 5%;
+        font-size: small;
     }
 }
 
