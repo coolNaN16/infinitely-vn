@@ -1,11 +1,17 @@
-function toggleSidebarDisplay(id) {
+function toggleSidebarDisplay(id, dir) {
+
     chosenVolume = document.getElementById("volumeInput").value
     bgMusic.volume = chosenVolume / 100
     const blur = document.getElementById("blur")
     const storage = document.getElementById(id)
     const cpanel = document.getElementById("controlPanel")
     if (storage.style.display == "flex") {
-        storage.style.translate = "-100% 0"
+        if (!dir) {
+            storage.style.translate = "-100% 0"
+        } else {
+            storage.style.translate = "100% 0"
+        }
+        
         blur.style.opacity = 0
 
         setTimeout(function() {
@@ -24,19 +30,24 @@ function toggleSidebarDisplay(id) {
         })
     }
 
-    if (cpanel.style.display == "none") {
-        cpanel.style.display = "flex"
+    if (!dir) {
+        if (cpanel.style.display == "none") {
+            cpanel.style.display = "flex"
 
-        requestAnimationFrame(() => {
-            fadeToVolume()
-            cpanel.style.translate = "0 0"
-        })
+            requestAnimationFrame(() => {
+                fadeToVolume()
+                cpanel.style.translate = "0 0"
+            })
+        } else {
+            cpanel.style.translate = "0 100%"
+            setTimeout(function() {
+                cpanel.style.display = "none"
+            }, 200)
+        }
     } else {
-        cpanel.style.translate = "0 100%"
-        setTimeout(function() {
-            cpanel.style.display = "none"
-        }, 200)
+
     }
+
 }
 
 function hideSidebarDisplay(id) {

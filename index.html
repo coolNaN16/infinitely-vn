@@ -11,6 +11,7 @@
     <script src="settings.js" defer></script>
     <script src="objects/characters.js" defer></script>
     <script src="objects/scenes.js" defer></script>
+    <script src="logs.js" defer></script>
     <body>
         <div id="bg"></div>
         <div id="fg">
@@ -28,7 +29,7 @@
             </div>
             <div id="nameBox"><p id="nameLabel">System</p></div>
             <div id="dialogueControlPanel">
-                <button id="logsBtn"> <img src="assets/UI/log.webp"> </button>
+                <button id="logsBtn" onclick="toggleSidebarDisplay('logsUI', 'right'); addToLogDisplay()"> <img src="assets/UI/log.webp"> </button>
                 <button id="autoplayBtn" onclick="toggleAutoPlay()"> <img src="assets/UI/autoplay.webp"> </button>
             </div>
             <p id="noticeLabel" style="opacity: 0;"> Autoplay is on. </p>
@@ -104,6 +105,18 @@
                 <div>
                     <label for="typeVolumeInput" id="volumeLabel"> Dialogue type volume:  </label>
                     <input id="typeVolumeInput" class="volumeSliders" type="range" min="0" max="100">
+                </div>
+            </div>
+        </div>
+
+        <div id="logsUI" style="display: none;">
+            <button id="backBtn" onclick="toggleSidebarDisplay(`logsUI`, 'right');"> Close ► </button>
+            <h2 style="margin: 0; padding: 10px; color: rgb(116, 98, 122);">Logs</h2>
+            <hr style="width: 100%;">
+            <div id="logsColumn">
+                <div class="logsRows" style="margin-bottom: 10px; width: 100%; border-radius: 5px; display: flex; flex-direction: row; justify-content: flex-start; align-items: center; background-color: rgba(138, 115, 146, 0.9); color: white; font-family: 'Commissioner';">
+                    <label style="border-radius: 3px; padding: 0; margin: 5px; width: 30%; background-color: rgb(116, 98, 122);"> Name:  </label> 
+                    <p style="padding: 0; margin: 5px; width: 70%;"> Dialogue... </p>
                 </div>
             </div>
         </div>

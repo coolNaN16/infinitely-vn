@@ -489,6 +489,8 @@ function next() {
             console.log(cDialogueIndex)
             console.log(currentDialogues.length)
 
+            addToLog(scenes[currentScene].dialogues[cDialogueIndex].char.name, scenes[currentScene].dialogues[cDialogueIndex].text)
+
             if (cDialogueIndex < currentDialogues.length) {
                 cDialogueIndex += 1 
             } else {
